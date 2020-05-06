@@ -1,53 +1,71 @@
 package shoppingCart.model;
 
-import java.time.LocalDate;
+
 
 
 public class Cart {
 
-	private Long id;
-	private String 	ProductName;
+	private Long cid;
+	private String itemid;
+	private String 	itemname;
+	private String uid;
 	private String Price;
-	private String description;
-	private LocalDate targetDate;
+	
 	
 	
 	protected Cart() {
 		
 	}
 	
-	public Cart(long id, String ProductName, String Price, String description, LocalDate targetDate) {
+	public Cart(long cid, String itemid, String itemname, String uid, String Price) {
 		super();
-		this.id = id;
-		this.ProductName = ProductName;
+		this.cid = cid;
+		this.itemid = itemid;
+		this.itemname = itemname;
+		this.uid = uid;
 		this.Price = Price;
-		this.description = description;
-		this.targetDate = targetDate;
+		
 		
 	}
 
-	public Cart(String ProductName, String Price, String description, LocalDate targetDate) {
+	public Cart(String itemid, String itemname, String uid, String Price) {
 		super();
-		this.ProductName = ProductName;
+		this.itemid = itemid;
+		this.itemname = itemname;
+		this.uid = uid;
 		this.Price = Price;
-		this.description = description;
-		this.targetDate = targetDate;
 	}
 	
-	public Long getId() {
-		return id;
+	public Long getcid() {
+		return cid;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setcid(Long cid) {
+		this.cid = cid;
 	}
 
-	public String getProductName() {
-		return ProductName;
+	public String getItemId() {
+		return itemid;
+	}
+
+	public void setItemId(String itemid) {
+		this.itemid = itemid;
 	}
 	
-	public void setProductName(String ProductName) {
-		this.ProductName = ProductName;
+	public String getItemName() {
+		return itemname;
+	}
+	
+	public void setItemName(String itemname) {
+		this.itemname = itemname;
+	}
+	
+	public String getuid() {
+		return uid;
+	}
+
+	public void setuid(String uid) {
+		this.uid = uid;
 	}
 	
 	public String getPrice() {
@@ -58,29 +76,12 @@ public class Cart {
 		this.Price = Price;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public LocalDate getTargetDate() {
-		return targetDate;
-	}
-
-	public void setTargetDate(LocalDate targetDate) {
-		this.targetDate = targetDate;
-	}
-
 	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + (int) (cid ^ (cid >>> 32));
 		return result;
 	}
 
@@ -93,7 +94,7 @@ public class Cart {
 		if (getClass() != obj.getClass())
 			return false;
 		Cart other = (Cart) obj;
-		if (id != other.id)
+		if (cid != other.cid)
 			return false;
 		return true;
 	}

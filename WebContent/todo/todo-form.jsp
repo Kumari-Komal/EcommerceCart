@@ -55,33 +55,30 @@
 				</caption>
 
 				<c:if test="${cart != null}">
-					<input type="hidden" name="id" value="<c:out value='${cart.id}' />" />
+					<input type="hidden" name="cid" value="<c:out value='${cart.cid}' />" />
 				</c:if>
+				
+				<fieldset class="form-group">
+					<label>Items ID</label> <input type="text"
+						value="<c:out value='${cart.itemid}' />" class="form-control"
+						name="itemid" required="required" minlength="5">
+				</fieldset>
 
 				<fieldset class="form-group">
-					<label>Product Name</label> <input type="text"
-						value="<c:out value='${cart.ProductName}' />" class="form-control"
-						name="ProductName" required="required" minlength="5">
+					<label>Items Name</label> <input type="text"
+						value="<c:out value='${cart.itemname}' />" class="form-control"
+						name="itemname" required="required" minlength="5">
 				</fieldset>
 				
+				<fieldset class="form-group">
+					<label>Items UID</label> <input type="text"
+						value="<c:out value='${cart.uid}' />" class="form-control"
+						name="uid" required="required" minlength="5">
+				</fieldset>
 				<fieldset class="form-group">
 					<label>Items Price</label> <input type="text"
 						value="<c:out value='${cart.Price}' />" class="form-control"
 						name="Price" minlength="5">
-				</fieldset>
-
-				<fieldset class="form-group">
-					<label>Item Description</label> <input type="text"
-						value="<c:out value='${cart.description}' />" class="form-control"
-						name="description" minlength="5">
-				</fieldset>
-
-				
-
-				<fieldset class="form-group">
-					<label>Items Target Date</label> <input type="date"
-						value="<c:out value='${cart.targetDate}' />" class="form-control"
-						name="targetDate" required="required">
 				</fieldset>
 
 				<button type="submit" class="btn btn-success">Save</button>

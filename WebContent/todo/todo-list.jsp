@@ -47,30 +47,29 @@
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<th>Product Name</th>
+					    <th>Items ID</th>
+						<th>Items Name</th>
+						<th>Items UID</th>
 						<th>Price</th>
-						<th>Target Date</th>
-						<th>Items description</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
 					<!--   for (Cart cart: carts) {  -->
-					<c:forEach var="cart" items="${listItems}">
+					<c:forEach var="carts" items="${listItems}">
 
 						<tr>
-							<td><c:out value="${cart.ProductName}" /></td>
-							<td><c:out value="${cart.Price}" /></td>
-							<td><c:out value="${cart.targetDate}" /></td>
-							<td><c:out value="${cart.description}" /></td>
+						<td><c:out value="${carts.itemid}" /></td>
+							<td><c:out value="${carts.itemname}" /></td>
+							<td><c:out value="${carts.uid}" /></td>
+							<td><c:out value="${carts.Price}" /></td>
 							
-
-							<td><a href="edit?id=<c:out value='${cart.id}' />">Edit</a>
+							<td><a href="edit?cid=<c:out value='${carts.cid}' />">Edit</a>
 								&nbsp;&nbsp;&nbsp;&nbsp; <a
-								href="delete?id=<c:out value='${cart.id}' />">Delete</a></td>
+								href="delete?cid=<c:out value='${carts.cid}' />">Delete</a></td>
 
-							<!--  <td><button (click)="updateItems(cart.id)" class="btn btn-success">Update</button>
-          							<button (click)="deleteItems(cart.id)" class="btn btn-warning">Delete</button></td> -->
+							<!--  <td><button (click)="updateItems(carts.cid)" class="btn btn-success">Update</button>
+          							<button (click)="deleteItems(carts.cid)" class="btn btn-warning">Delete</button></td> -->
 						</tr>
 					</c:forEach>
 					<!-- } -->

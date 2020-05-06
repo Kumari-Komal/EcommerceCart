@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,13 +15,13 @@ import shoppingCart.utils.JDBCUtils;
 
 public class CartDaoImpl implements CartDao {
 
-	private static final String INSERT_Item_SQL = "INSERT INTO carts"
-			+ "  (ProductName, Price, description, target_date) VALUES " + " (?, ?, ?, ?);";
+	private static final String INSERT_Item_SQL = "INSERT INTO cart"
+			+ "  (itemid,itemname,uid,Price) VALUES " + " (?, ?, ?, ?);";
 
-	private static final String SELECT_Items_BY_ID = "select id,ProductName, Price, description, target_date from carts where id =?";
-	private static final String SELECT_ALL_Items = "select * from carts";
-	private static final String DELETE_Items_BY_ID = "delete from carts where id = ?;";
-	private static final String UPDATE_Cart = "update carts set ProductName = ?, Price= ?, description =?, target_date =? where id = ?;";
+	private static final String SELECT_Items_BY_ID = "select cid,itemid,itemname,uid Price from cart where cid =?";
+	private static final String SELECT_ALL_Items = "select * from cart";
+	private static final String DELETE_Items_BY_ID = "delete from cart where cid = ?;";
+	private static final String UPDATE_Cart = "update cart set itemid=?,itemname = ?,uid=? Price= ? where cid = ?;";
 
 	public CartDaoImpl() {
 	}
@@ -32,10 +32,11 @@ public class CartDaoImpl implements CartDao {
 		// try-with-resource statement will auto close the connection.
 		try (Connection connection = JDBCUtils.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_Item_SQL)) {
-			preparedStatement.setString(1, cart.getProductName());
-			preparedStatement.setString(2, cart.getPrice());
-			preparedStatement.setString(3, cart.getDescription());
-			preparedStatement.setDate(4, JDBCUtils.getSQLDate(cart.getTargetDate()));
+			preparedStatement.setString(1,cart.getItemId());
+			preparedStatement.setString(2, cart.getItemName());
+			preparedStatement.setString(3,cart.getuid());
+			preparedStatement.setString(4, cart.getPrice());
+			
 			
 			System.out.println(preparedStatement);
 			preparedStatement.executeUpdate();
@@ -58,13 +59,14 @@ public class CartDaoImpl implements CartDao {
 
 			// Step 4: Process the ResultSet object.
 			while (rs.next()) {
-				long id = rs.getLong("id");
-				String ProductName = rs.getString("ProductName");
+				long cid = rs.getLong("cid");
+				String itemid =rs.getString("itemid");
+				String itemname = rs.getString("itemname");
+				String uid = rs.getString("uid");
 				String Price = rs.getString("Price");
-				String description = rs.getString("description");
-				LocalDate targetDate = rs.getDate("target_date").toLocalDate();
 				
-				cart = new Cart(id, ProductName, Price, description, targetDate);
+				
+				cart = new Cart(cid,itemid, itemname,uid, Price);
 			}
 		} catch (SQLException exception) {
 			JDBCUtils.printSQLException(exception);
@@ -89,13 +91,13 @@ public class CartDaoImpl implements CartDao {
 
 			// Step 4: Process the ResultSet object.
 			while (rs.next()) {
-				long id = rs.getLong("id");
-				String ProductName = rs.getString("ProductName");
+				long cid = rs.getLong("cid");
+				String itemid = rs.getString("itemid");
+				String itemname = rs.getString("itemname");
+				String uid = rs.getString("uid");
 				String Price = rs.getString("Price");
-				String description = rs.getString("description");
-				LocalDate targetDate = rs.getDate("target_date").toLocalDate();
 				
-				carts.add(new Cart(id, ProductName, Price, description, targetDate));
+				carts.add(new Cart(cid,itemid, itemname,uid, Price));
 			}
 		} catch (SQLException exception) {
 			JDBCUtils.printSQLException(exception);
@@ -119,12 +121,12 @@ public class CartDaoImpl implements CartDao {
 		boolean rowUpdated;
 		try (Connection connection = JDBCUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(UPDATE_Cart);) {
-			statement.setString(1, cart.getProductName());
-			statement.setString(2, cart.getPrice());
-			statement.setString(3, cart.getDescription());
-			statement.setDate(4, JDBCUtils.getSQLDate(cart.getTargetDate()));
+			statement.setString(1, cart.getItemId());
+			statement.setString(2, cart.getItemName());
+			statement.setString(3, cart.getuid());
+			statement.setString(4, cart.getPrice());
 			
-			statement.setLong(5, cart.getId());
+			statement.setLong(5, cart.getcid());
 			rowUpdated = statement.executeUpdate() > 0;
 		}
 		return rowUpdated;

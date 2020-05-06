@@ -2,7 +2,7 @@ package shoppingCart.web;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
+
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -82,8 +82,8 @@ public class CartController extends HttpServlet {
 
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		Cart existingItems = cartDAO.selectItems(id);
+		int cid = Integer.parseInt(request.getParameter("cid"));
+		Cart existingItems = cartDAO.selectItems(cid);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("todo/todo-list.jsp");
 		request.setAttribute("Items", existingItems);
 		dispatcher.forward(request, response);
@@ -91,31 +91,33 @@ public class CartController extends HttpServlet {
 	}
 
 	private void insertItems(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-		
-		String ProductName = request.getParameter("ProductName");
+		String itemid = request.getParameter("itemid");
+		String itemname = request.getParameter("itemname");
+		String uid = request.getParameter("uid");
 		String Price = request.getParameter("Price");
-		String description = request.getParameter("description");
+		
 		
 		/*DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-mm-dd");
 		LocalDate targetDate = LocalDate.parse(request.getParameter("targetDate"),df);*/
 		
 		
-		Cart newItem = new Cart(ProductName, Price, description, LocalDate.now());
+		Cart newItem = new Cart(itemid,itemname, uid,Price);
 		cartDAO.insertItems(newItem);
 		response.sendRedirect("list");
 	}
 
 	private void updateItems(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		
-		String ProductName = request.getParameter("ProductName");
+		int cid = Integer.parseInt(request.getParameter("cid"));
+		String itemid=request.getParameter("itemid");
+		String itemname = request.getParameter("itemname");
+		String uid = request.getParameter("uid");
 		String Price = request.getParameter("Price");
-		String description = request.getParameter("description");
+		
 		//DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-mm-dd");
-		LocalDate targetDate = LocalDate.parse(request.getParameter("targetDate"));
+		//LocalDate targetDate = LocalDate.parse(request.getParameter("targetDate"));
 		
 		
-		Cart updateCart = new Cart(id, ProductName, Price, description, targetDate);
+		Cart updateCart = new Cart(cid,itemid, itemname,uid, Price);
 		
 		cartDAO.updateItems(updateCart);
 		
@@ -123,8 +125,8 @@ public class CartController extends HttpServlet {
 	}
 
 	private void deleteItems(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		cartDAO.deleteItems(id);
+		int cid = Integer.parseInt(request.getParameter("cid"));
+		cartDAO.deleteItems(cid);
 		response.sendRedirect("list");
 	}
 }
