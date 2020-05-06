@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Register Page</title>
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -36,7 +36,16 @@
 							class="form-control" id="uname" placeholder="last Name"
 							name="lastName" required>
 					</div>
-
+                    <div class="form-group">
+						<label for="uname">Email Address:</label> <input type="text"
+							class="form-control" id="email" placeholder="Email Address"
+							name="email" required>
+					</div>
+                    <div class="form-group">
+						<label for="uname">Mobile Number:</label> <input type="text"
+							class="form-control" id="mobilenumber" placeholder="Mobile Number"
+							name="mobilenumber" required>
+					</div>
 					<div class="form-group">
 						<label for="uname">User Name:</label> <input type="text"
 							class="form-control" id="username" placeholder="User Name"

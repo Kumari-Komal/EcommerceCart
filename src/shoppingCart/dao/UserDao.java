@@ -10,9 +10,9 @@ import shoppingCart.utils.JDBCUtils;
 public class UserDao {
 
 	public int registerEmployee(User employee) throws ClassNotFoundException {
-		String INSERT_USERS_SQL = "INSERT INTO users"
-				+ "  (first_name, last_name, username, password) VALUES "
-				+ " (?, ?, ?, ?);";
+		String INSERT_USERS_SQL = "INSERT INTO user"
+				+ "  (firstname, lastname,email,mobilenumber,username,password) VALUES "
+				+ " (?, ?, ?, ?, ?, ?);";
 
 		int result = 0;
 		try (Connection connection = JDBCUtils.getConnection();
@@ -20,8 +20,10 @@ public class UserDao {
 				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
 			preparedStatement.setString(1, employee.getFirstName());
 			preparedStatement.setString(2, employee.getLastName());
-			preparedStatement.setString(3, employee.getUsername());
-			preparedStatement.setString(4, employee.getPassword());
+			preparedStatement.setString(3, employee.getemail());
+			preparedStatement.setString(4, employee.getMobileNumber());
+			preparedStatement.setString(5, employee.getUsername());
+			preparedStatement.setString(6, employee.getPassword());
 
 			System.out.println(preparedStatement);
 			// Step 3: Execute the query or update query

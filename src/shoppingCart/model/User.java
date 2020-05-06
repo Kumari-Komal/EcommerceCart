@@ -10,6 +10,8 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String firstName;
 	private String lastName;
+	private String email;
+	private String mobilenumber;
 	private String username;
 	private String password;
 	public String getFirstName() {
@@ -24,6 +26,22 @@ public class User implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	public String getemail() {
+		return email;
+	}
+	public void setemail(String email) {
+		this.email = email;
+	}
+	
+	public String getMobileNumber() {
+		return mobilenumber;
+	}
+	public void setMobileNumber(String mobilenumber) {
+		this.mobilenumber = mobilenumber;
+	}	
+	
+	
 	public String getUsername() {
 		return username;
 	}
